@@ -2,7 +2,7 @@ var score = 0,
     gscore = 0,
     countblink = 10,
     ghost = false;
-ghost2 = false;
+    ghost2 = false;
 var player = {
     x: 50,
     y: 100,
@@ -14,7 +14,7 @@ var player = {
 var enemy = {
     x: 150,
     y: 200,
-    speed: 5,
+    speed: 2,
     moving: 0,
     dirx: 0,
     diry: 0,
@@ -124,14 +124,14 @@ function render() {
         powerdot.y = myNum(250) + 30;
         powerdot.powerup = true;
     }
-    // check if ghost is on screen
+    // check if enemy is on screen
     if (!ghost) {
         enemy.ghostNum = myNum(5) * 64;
         enemy.x = myNum(450);
         enemy.y = myNum(250) + 30;
         ghost = true;
     }
-    // check if ghost is on screen
+    // check if enemy2 is on screen
     if (!ghost2) {
         enemy2.ghostNum = myNum(5) * 64;
         enemy2.x = myNum(450);
@@ -177,9 +177,11 @@ function render() {
     if (enemy.y < 0) {
         enemy.y = (canvas.height - 32);
     }
+
+    //move enemy2
     if (enemy2.moving < 0) {
-        enemy2.moving = (myNum(20) * 3) + myNum(1);
-        enemy2.speed = myNum(2) + 1;
+        enemy2.moving = (myNum(40) * 3) + myNum(1);
+        enemy2.speed = 1;
         enemy2.dirx = 0;
         enemy2.diry = 0;
         if (powerdot.ghosteat) {
@@ -201,7 +203,7 @@ function render() {
     }
     enemy2.moving--;
     enemy2.x = enemy2.x + enemy2.dirx;
-    enemy2.y = enemy2.y + enemy2.diry;
+    enemy2.y = enemy2.y + enemy2.diry; 
     // prevent run off screen
     if (enemy2.x >= (canvas.width - 32)) {
         enemy2.x = 0;
